@@ -1,0 +1,12 @@
+services:
+  fantasy-analyst:
+    build: .
+    ports:
+      - "8501:8501"
+    env_file:
+      - .env
+    volumes:
+      # Persist ChromaDB and DuckDB across container restarts -- this is
+      # what makes the data survive instead of resetting every run.
+      - ./data:/app/data
+    restart: unless-stopped
